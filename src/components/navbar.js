@@ -1,20 +1,26 @@
-import React, { Component } from 'react'
+import React, {useState ,useContext} from 'react';
+import context from './context';
 
-export class Navbar extends Component {
-    render() {
+function Navbar() {
+
+    let name = useContext(context);
+    // useEffect(()=>{
+
+
+    // }, [name , update]);
         return (
                 <section>
                   <nav className="navbar navbar-dark bg-dark hornav fixed-top">
                     <a href="#" className="navbar-brand">OWASP</a>
                     <div className="ml-auto">
                       <ul className="navbar-nav">
-                        <li className="nav-item"><a href="#" className="nav-link">Welcome, <span>Your Name</span></a></li>
+                        <li className="nav-item"><a href="#" className="nav-link">Welcome <span>{name}</span></a></li>
                       </ul>
                     </div>
                   </nav>
                 </section>
               )
-    }
-}
+    };
+
 
 export default Navbar

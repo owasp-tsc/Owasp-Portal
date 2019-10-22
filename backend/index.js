@@ -12,14 +12,14 @@ mongoose.connect("mongodb://localhost/CodingMarathonPortal" ,{useNewUrlParser:tr
 app.use(body.json());
 app.use(body.urlencoded());
 
-app.post('/answer' ,(req , res)=>{
-    const user = model.findOne({"Username" : req.body.Username});
-  //  user.Answers = [...user.Answers , {"Question": req.body.question , "Answer":req.body.answer}];
-    //user.save();
-    console.log(user.Username); 
-    res.json(user);
+app.post('/answer' ,async (req , res)=>{
+    const user = await model.findOne({"Username" : req.body.Username});
+   user.Answers = [...user.Answers , {"Question": req.body.Question , "Answer":req.body.Answer}];
+   console.log(user.Answers);
+    user.save();
+    res.send("success");
 });
-
+    
 app.post('/user', (req, res)=>{
     const data = new model({
         "Username" : req.body.Username ,
