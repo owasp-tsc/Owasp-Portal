@@ -7,7 +7,7 @@ function Navbar() {
     let name = useContext(context);
     // useEffect(()=>{
 
-
+  console.log(name);
     // }, [name , update]);
         return (
                 <section>
