@@ -33,9 +33,10 @@ class App extends React.PureComponent {
           <React.Fragment>
             <NavbarProvider value={navbarProps}>
               <Navbar />
-            </NavbarProvider>
+            
             <SideBar />
             <Render />
+            </NavbarProvider>
           </React.Fragment>
         ) : <NavbarProvider value={navbarProps}>
             <Router>

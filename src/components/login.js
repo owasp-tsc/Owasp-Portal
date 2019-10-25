@@ -25,10 +25,8 @@ class Login extends Component {
       "password": this.state.pass
     };
     const update = await axios.post('http://localhost:8000/loginData', data);
-    console.log(update);
     if (update.data === "success") {
       this.props.update({ username: this.state.value});
-      console.log(this.props.update)
       this.props.onClick();
     }
     else
@@ -100,8 +98,6 @@ class Login extends Component {
 const Hook = (props)=>{
 
   let {username , updateGlobalState} = useContext(NavbarContext);
-  console.log(username);
-  console.log(updateGlobalState);
   return <Login username = {username} update={(value)=>updateGlobalState(value)} {...props}/>
 }
 

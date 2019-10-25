@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component , useContext} from 'react';
 import axios from 'axios';
+import { NavbarContext } from '../Context/Navbar';
 
-class render extends Component {
+class Render extends Component {
   constructor(props) {
     super(props)
 
@@ -11,14 +12,12 @@ class render extends Component {
       number: 0,
       value: Number
     }
+   
   }
 
   async componentDidMount() {
     var list = await axios.get('http://localhost:8000/questions');
-    //const list= [{"Question" : "asdsafas"  , "Answer" : 23}];
-
-    console.log(list);
-    console.log(list.data[0].Question);
+    //const list= [{"Question" : "asdsafas"  , "Answer" : 23}];  
     this.setState({ list: list.data, length: list.data.length });
   }
 
@@ -26,14 +25,14 @@ class render extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   onClick = async (e) => {
-    console.log("lkafklsajfl");
+    console.log(this.props.username);
 
     const data = {
-      "Username": "Rachit2501",
+      "Username": this.props.username,
       "Question": this.state.list[this.state.number].Question,
       "Answer": this.state.value
     }
-    const upload = await axios.post('http://localhost:8000/answer', data);
+   await axios.post('http://localhost:8000/answer', data);
     this.setState({ number: this.state.number + 1 });
 
   }
@@ -41,7 +40,7 @@ class render extends Component {
   render() {
     return (
       <React.Fragment>
-        {(this.state.length === this.state.number) && <h1>Thank You!</h1>}
+        {(this.state.length === this.state.number) && <div className = "thankyou"><h1>Thank You!</h1></div>}
         <main>
           {(this.state.length > this.state.number) && this.state.list[this.state.number].Question}
           <br></br>
@@ -52,6 +51,15 @@ class render extends Component {
       </React.Fragment>
     );
   }
-}
+};
 
-export default render
+
+
+
+const Rendering = (props) => {
+  let {username } = useContext(NavbarContext);
+  console.log(username);
+  return ( <Render {...props} username = {username} /> );
+}
+ 
+export default Rendering;

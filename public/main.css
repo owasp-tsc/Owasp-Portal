@@ -403,3 +403,10 @@ iframe {
   padding: 20px;
   height: 90px;
 }
+
+.thankyou{
+  position: absolute;
+  left:50px !important;
+  top:70px !important;
+  font-size: 30px !important;
+}
