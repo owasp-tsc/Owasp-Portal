@@ -11,8 +11,8 @@ function Navbar() {
         <div className="ml-auto">
           <ul className="navbar-nav">
             <li className="nav-item"><a href="#" className="nav-link">Welcome <span>{username}</span></a></li>
-            {/* Updating username via button below */}
-            <button onClick={() => updateGlobalState({ username: "Username Got Updated!" })}>Click me to update Username</button>
+            {/* Updating username via button below 
+            <button onClick={() => updateGlobalState({ username: "Username Got Updated!" })}>Click me to update Username</button>*/}
           </ul>
         </div>
       </nav>

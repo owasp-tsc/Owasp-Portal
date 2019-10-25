@@ -15,7 +15,7 @@ class App extends React.PureComponent {
 
     // global state 
     this.state = {
-      boolState: true,
+      boolState: false,
       username: "Owasp User"
     }
   }
@@ -37,10 +37,13 @@ class App extends React.PureComponent {
             <SideBar />
             <Render />
           </React.Fragment>
-        ) : <Router>
+        ) : <NavbarProvider value={navbarProps}>
+            <Router>
             <Login path="/" onClick={() => this.updateGlobalState({ boolState: !boolState })} />
             <Register path="/register" />
-          </Router>}
+            
+          </Router>
+          </NavbarProvider>}
       </React.Fragment>
     );
   }

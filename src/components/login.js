@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { Link } from "@reach/router";
 import axios from 'axios';
+import {NavbarContext} from "../Context/Navbar";
 
-class login extends Component {
+class Login extends Component {
+ 
   constructor(props) {
     super(props)
     this.state = {
@@ -25,7 +27,9 @@ class login extends Component {
     const update = await axios.post('http://localhost:8000/loginData', data);
     console.log(update);
     if (update.data === "success") {
-      this.props.onClick("true");
+      this.props.update({ username: this.state.value});
+      console.log(this.props.update)
+      this.props.onClick();
     }
     else
       this.setState({ "incorrect": "Username or password was incorrect" })
@@ -61,7 +65,7 @@ class login extends Component {
                 </div>
                 {this.state.incorrect}
                 <br></br>
-
+                {this.props.username}
                 <div className="container-login100-form-btn">
                   <button className="login100-form-btn" type="submit" >
                     Sign in
@@ -89,6 +93,16 @@ class login extends Component {
       </React.Fragment>
     );
   }
+};
+
+
+
+const Hook = (props)=>{
+
+  let {username , updateGlobalState} = useContext(NavbarContext);
+  console.log(username);
+  console.log(updateGlobalState);
+  return <Login username = {username} update={(value)=>updateGlobalState(value)} {...props}/>
 }
 
-export default login;
+export default Hook;
