@@ -6,7 +6,7 @@ const {model , answers} = require("./database");
 const _ = require("lodash");
 const path = require('path');
 
-mongoose.connect("mongodb://localhost/CodingMarathonPortal" ,{useNewUrlParser:true})
+mongoose.connect("mongodb+srv://rachit2501:narutorock123@codemarathon-hg0yk.mongodb.net/test?retryWrites=true&w=majority" ,{useNewUrlParser:true})
     .then(()=>console.log("Connected to mongodb"))
     .catch(()=>console.log("Failed to connect to mongodb"));
 
