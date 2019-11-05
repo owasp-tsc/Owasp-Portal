@@ -3,6 +3,8 @@ import { Link } from "@reach/router";
 import axios from 'axios';
 import {NavbarContext} from "../Context/Navbar";
 
+
+var link = "https://owasp-portal.herokuapp.com/";
 class Login extends Component {
  
   constructor(props) {
@@ -25,7 +27,7 @@ class Login extends Component {
       "password": this.state.pass
     };
     console.log(data);
-    const update = await axios.post('http://localhost:8000/loginData', data);
+    const update = await axios.post(link +'loginData', data);
    console.log(update);
     if (update.data === "success") {
       this.props.update({ username: this.state.value});
@@ -40,7 +42,7 @@ class Login extends Component {
     const data = {
       "Username": this.state.register
     };
-    const update = await axios.post('http://localhost:8000/user', data);
+    const update = await axios.post(link +'user', data);
     if (update) this.setState({ "success": "Registered Successfully" });
     console.log(update);
   }
@@ -65,7 +67,6 @@ class Login extends Component {
                 </div>
                 {this.state.incorrect}
                 <br></br>
-                {this.props.username}
                 <div className="container-login100-form-btn">
                   <button className="login100-form-btn" type="submit" >
                     Sign in

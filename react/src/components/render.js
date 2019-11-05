@@ -1,7 +1,7 @@
 import React, { Component , useContext} from 'react';
 import axios from 'axios';
 import { NavbarContext } from '../Context/Navbar';
-
+const link = 'https://owasp-portal.herokuapp.com/';
 class Render extends Component {
   constructor(props) {
     super(props)
@@ -16,7 +16,7 @@ class Render extends Component {
   }
 
   async componentDidMount() {
-    var list = await axios.get('http://localhost:8000/questions');
+    var list = await axios.get(link + 'questions');
     //const list= [{"Question" : "asdsafas"  , "Answer" : 23}];  
     console.log(list.data.length);
     this.setState({ list: list.data, length: list.data.length });
@@ -33,7 +33,7 @@ class Render extends Component {
       "Question": this.state.list[this.state.number].Question,
       "Answer": this.state.value
     }
-   const upload = await axios.post('http://localhost:8000/answer', data);
+   const upload = await axios.post(link +'answer', data);
    console.log(this.state.number);
     this.setState({ number: this.state.number + 1 });
 
