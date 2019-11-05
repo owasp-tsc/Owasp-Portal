@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const body = require("body-parser");
 const {model , answers} = require("./database");
 const _ = require("lodash");
+const path = require('path');
 
 mongoose.connect("mongodb://localhost/CodingMarathonPortal" ,{useNewUrlParser:true})
     .then(()=>console.log("Connected to mongodb"))
@@ -16,7 +17,10 @@ mongoose.connect("mongodb://localhost/CodingMarathonPortal" ,{useNewUrlParser:tr
       });
 app.use(body.json());
 app.use(body.urlencoded());
-
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/',(req , res)=>{
+    res.sendFile(path.join(__dirname , 'build' , 'index.html'));
+})
 
 app.post('/answer' ,async (req , res)=>{
     const user = await model.findOne({"Username" : req.body.Username});
