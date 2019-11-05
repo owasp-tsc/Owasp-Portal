@@ -9,8 +9,14 @@ mongoose.connect("mongodb://localhost/CodingMarathonPortal" ,{useNewUrlParser:tr
     .then(()=>console.log("Connected to mongodb"))
     .catch(()=>console.log("Failed to connect to mongodb"));
 
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+      });
 app.use(body.json());
 app.use(body.urlencoded());
+
 
 app.post('/answer' ,async (req , res)=>{
     const user = await model.findOne({"Username" : req.body.Username});
@@ -19,6 +25,15 @@ app.post('/answer' ,async (req , res)=>{
     user.save();
     res.send("success");
 });
+
+app.post('/loginData' , (req , res)=>{
+    console.log(req.body.password);
+    if(req.body.password == 12345){
+    const user = model.findOne({Username : req.body.Username});
+    if(user) res.send("success");
+    else res.send("failed");
+    }
+})
     
 app.post('/user', (req, res)=>{
     const data = new model({
