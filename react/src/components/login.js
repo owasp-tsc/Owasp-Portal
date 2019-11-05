@@ -24,7 +24,9 @@ class Login extends Component {
       "Username": this.state.value,
       "password": this.state.pass
     };
+    console.log(data);
     const update = await axios.post('http://localhost:8000/loginData', data);
+   console.log(update);
     if (update.data === "success") {
       this.props.update({ username: this.state.value});
       this.props.onClick();

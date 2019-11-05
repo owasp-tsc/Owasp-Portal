@@ -18,6 +18,7 @@ class Render extends Component {
   async componentDidMount() {
     var list = await axios.get('http://localhost:8000/questions');
     //const list= [{"Question" : "asdsafas"  , "Answer" : 23}];  
+    console.log(list.data.length);
     this.setState({ list: list.data, length: list.data.length });
   }
 
@@ -32,7 +33,8 @@ class Render extends Component {
       "Question": this.state.list[this.state.number].Question,
       "Answer": this.state.value
     }
-   await axios.post('http://localhost:8000/answer', data);
+   const upload = await axios.post('http://localhost:8000/answer', data);
+   console.log(this.state.number);
     this.setState({ number: this.state.number + 1 });
 
   }
@@ -44,9 +46,11 @@ class Render extends Component {
         <main>
           {(this.state.length > this.state.number) && this.state.list[this.state.number].Question}
           <br></br>
+          {(this.state.length > this.state.number) && (<React.Fragment>
           <div className="color"></div>
           <input type="text/css" className="postionButton" value={this.state.value} name="value" onChange={this.onChange}></input>
           <button className="postionButton" onClick={this.onClick}>Submit</button>
+          </React.Fragment>)}
         </main>
       </React.Fragment>
     );
